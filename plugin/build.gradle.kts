@@ -54,7 +54,7 @@ repositories {
   }
   maven {
     name = "gtnh"
-    url = uri("https://nexus.gtnewhorizons.com/repository/public/")
+    url = uri("https://mvn.falsepattern.com/horizon/")
   }
   mavenCentral {}
   gradlePluginPortal()
@@ -409,11 +409,9 @@ publishing {
 
   repositories {
     maven {
-      url = uri("https://nexus.gtnewhorizons.com/repository/releases/")
-      credentials {
-        username = System.getenv("MAVEN_USER") ?: "NONE"
-        password = System.getenv("MAVEN_PASSWORD") ?: "NONE"
-      }
+      url = uri("https://mvn.falsepattern.com/fpgradle/")
+      name = "fpgradle"
+      credentials(PasswordCredentials::class)
     }
   }
 }

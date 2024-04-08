@@ -55,6 +55,12 @@ repositories {
   maven {
     name = "gtnh"
     url = uri("https://mvn.falsepattern.com/horizon/")
+    mavenContent {
+      includeGroupAndSubgroups("com.gtnewhorizons")
+      includeGroupAndSubgroups("com.github.GTNewHorizons")
+      includeGroup("com.github.bsideup.jabel")
+      includeModule("org.jetbrains", "intellij-fernflower")
+    }
   }
   mavenCentral {}
   gradlePluginPortal()

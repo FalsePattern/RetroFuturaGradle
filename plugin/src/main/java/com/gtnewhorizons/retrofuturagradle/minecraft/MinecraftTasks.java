@@ -10,12 +10,14 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.gradle.api.DefaultTask;
 import org.gradle.api.Project;
+import org.gradle.api.artifacts.ArtifactRepositoryContainer;
 import org.gradle.api.artifacts.ComponentMetadataSupplier;
 import org.gradle.api.artifacts.Configuration;
 import org.gradle.api.artifacts.DependencySubstitutions;
 import org.gradle.api.artifacts.ExternalModuleDependency;
 import org.gradle.api.artifacts.dsl.DependencyHandler;
 import org.gradle.api.artifacts.dsl.RepositoryHandler;
+import org.gradle.api.artifacts.repositories.MavenArtifactRepository;
 import org.gradle.api.attributes.AttributeContainer;
 import org.gradle.api.attributes.Category;
 import org.gradle.api.attributes.LibraryElements;
@@ -390,11 +392,15 @@ public final class MinecraftTasks {
                     .because("To fix log4shell");
         });
 
-        repos.mavenCentral().mavenContent(content -> {
-            content.excludeGroup("com.mojang");
-            content.excludeGroup("net.minecraftforge");
-            content.excludeGroup("de.oceanlabs.mcp");
-            content.excludeGroup("cpw.mods");
+        repos.configureEach(repo -> {
+            if (repo instanceof MavenArtifactRepository maven && maven.getName().equals(ArtifactRepositoryContainer.DEFAULT_MAVEN_CENTRAL_REPO_NAME)) {
+                maven.mavenContent(content -> {
+                    content.excludeGroup("com.mojang");
+                    content.excludeGroup("net.minecraftforge");
+                    content.excludeGroup("de.oceanlabs.mcp");
+                    content.excludeGroup("cpw.mods");
+                });
+            }
         });
 
         final String osArch = System.getProperty("os.arch");

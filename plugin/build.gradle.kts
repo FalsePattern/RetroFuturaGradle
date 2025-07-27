@@ -112,7 +112,7 @@ dependencies {
   // CSV reader, also used by SpecialSource
   implementation("com.opencsv:opencsv:5.9")
   // Diffing&Patching
-  implementation("org.ow2.asm:asm:9.7")
+  implementation("org.ow2.asm:asm:9.8")
   implementation("com.cloudbees:diff4j:1.1")
   implementation("com.github.jponge:lzma-java:1.3")
   implementation("net.md-5:SpecialSource:1.11.4")
